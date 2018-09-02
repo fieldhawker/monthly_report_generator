@@ -1,9 +1,13 @@
-function doGet() {  
-  var html = HtmlService.createTemplateFromFile('input_monthly_report');  
-  
+function doGet() {
+  var html = HtmlService.createTemplateFromFile('input_monthly_report');
   html.title = 'ゲツジェネ';
   html.data = JSON.stringify( getStaffs() );
-  return html.evaluate();  
+  
+  var htmlOutput = html.evaluate();
+  htmlOutput
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  
+  return htmlOutput;
 }
 
 function doPost(e){
@@ -76,8 +80,24 @@ function doPost(e){
   html.mail_text = mail_text;
   html.mail_address = group_address;
   html.mailto = mailto;
+  html.staff_select = staff_select;
+  html.start_date = start_date;
+  html.end_date = end_date;
+  html.q1 = q1;
+  html.q2 = q2;
+  html.q3 = q3;
+  html.q4 = q4;
+  html.q5 = q5;
+  html.q6 = q6;
+  html.q7 = q7;
+  html.q8 = q8;
+  html.q9 = q9;
   
-  return html.evaluate();
+  var htmlOutput = html.evaluate();
+  htmlOutput
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+  
+  return htmlOutput;
   
 }
 

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125084205-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-125084205-2');
+    </script>
+
     <base target="_top">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <?!= HtmlService.createHtmlOutputFromFile('stylesheet').getContent(); ?>
@@ -10,7 +20,7 @@
 <form id="weekly_report" method="post" action=<?=url?>>
   <div id="space">
     <div class="msr_text_03">
-      <h1 class="msr_h103">ゲツジェネ 0.1</h1>
+      <h1 class="msr_h103">ゲツジェネ 1.0 Ver.KT </h1>
     </div>
 
   <div class="msr_pulldown_03">
@@ -21,21 +31,21 @@
   </div>
   <div class="msr_text_03">
     <h3 class="msr_h303">期間</h3>
-    <input type="text" class="w200" id="start_date" name="start_date" readonly="readonly" /> - 
-    <input type="text" class="w200" id="end_date" name="end_date" readonly="readonly" />
+    <input type="text" class="w120" id="start_date" name="start_date" readonly="readonly" /> - 
+    <input type="text" class="w120" id="end_date" name="end_date" readonly="readonly" />
   </div>
   
   <div class="msr_text_03">
     <h3 class="msr_h303">■1．顧客名</h3>
-    <input type="text" class="w300" id="q1_01" name="q1" />
+    <input type="text" id="q1" name="q1" />
   </div>
   <div class="msr_text_03">
     <h3 class="msr_h303">■2．案件名</h3>
-    <input type="text" class="w300" id="q2_01" name="q2" />
+    <input type="text" id="q2" name="q2" />
   </div>
   <div class="msr_text_03">
     <h3 class="msr_h303">■3．場所(最寄駅)</h3>
-    <input type="text" class="w300" id="q3_01" name="q3" />
+    <input type="text" id="q3" name="q3" />
   </div>
   
   <div class="msr_chack_03">
@@ -210,25 +220,33 @@
   
   <div class="msr_textarea_03">
     <h3 class="msr_h303">■8. 今月使用したツール(自由記入)</h3>
-      <textarea name="q8"></textarea>
+      <textarea id="q8" name="q8"></textarea>
   </div>
   
   <div class="msr_textarea_03">
-    <h3 class="msr_h303">■9. 相談したいこと・困っていること(自由記入)</h3>
-      <textarea name="q9"></textarea>
+    <h3 class="msr_h303">■9. 相談したいこと・困っていること<br />(自由記入)</h3>
+      <textarea id="q9" name="q9"></textarea>
   </div>
   <p class="msr_sendbtn_03">
     <input type="submit" value="出力">
   </p>
   </div>
 </form>
+
 <?!= HtmlService.createHtmlOutputFromFile('javascript').getContent(); ?>
     <script>
       $(function() {
       
+        var q4 = '';
+        var q5 = '';
+        var q6 = '';
+        var q7 = '';
+        
         // =====================
         // 社員選択セレクトボックスの項目追加
         // =====================
+        
+        var staff_select = $.cookie('staff_select');
         
         var select = document.getElementById("staff_select");
         var staffs = { data: JSON.parse(<?= data ?>) };
@@ -237,10 +255,56 @@
         
           option = document.createElement('option');
           option.setAttribute('value', i);
+          if (staffs.data[i].name == staff_select) { 
+            option.setAttribute('selected', 'selected');
+          }
           option.innerHTML = staffs.data[i].name;
           select.add(option);
           
         }
+        
+        if ($.cookie('start_date')) {
+          $("#start_date").val($.cookie('start_date'));
+        }
+        if ($.cookie('end_date')) {
+          $("#end_date").val($.cookie('end_date'));
+        }
+        
+        if ($.cookie('q4')) q4 = $.cookie('q4');
+        if ($.cookie('q5')) q5 = $.cookie('q5');
+        if ($.cookie('q6')) q6 = $.cookie('q6');
+        if ($.cookie('q7')) q7 = $.cookie('q7');
+        
+        
+        $('[name="q4"]').map(function(){
+          if (q4.indexOf( $(this).val() ) !== -1) {
+            $(this).attr('checked', 'checked');
+          }
+        });
+        
+        $('[name="q5"]').map(function(){
+          if (q5.indexOf( $(this).val() ) !== -1) {
+            $(this).attr('checked', 'checked');
+          }
+        });
+        
+        $('[name="q6"]').map(function(){
+          if (q6.indexOf( $(this).val() ) !== -1) {
+            $(this).attr('checked', 'checked');
+          }
+        });
+        
+        $('[name="q7"]').map(function(){
+          if (q7.indexOf( $(this).val() ) !== -1) {
+            $(this).attr('checked', 'checked');
+          }
+        });
+
+        $("#q1").val($.cookie('q1'));
+        $("#q2").val($.cookie('q2'));
+        $("#q3").val($.cookie('q3'));
+        $("#q8").text($.cookie('q8'));
+        $("#q9").text($.cookie('q9'));
         //console.log(staffs.data[0].name);
       });
     </script>

@@ -1,10 +1,10 @@
 function doGet() {
   var html = HtmlService.createTemplateFromFile('input_monthly_report');
-  html.title = 'ゲツジェネ';
   html.data = JSON.stringify( getStaffs() );
   
   var htmlOutput = html.evaluate();
   htmlOutput
+    .setTitle('[SEP][二課１G] ゲツジェネ')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   
   return htmlOutput;
@@ -14,7 +14,6 @@ function doPost(e){
 
   var html = HtmlService.createTemplateFromFile('result_monthly_report');  
   
-  html.title = 'ゲツジェネ';
   var template = getTemplate();
   var text  = template[1][0];
   var title = template[1][1];
@@ -95,6 +94,7 @@ function doPost(e){
   
   var htmlOutput = html.evaluate();
   htmlOutput
+    .setTitle('[SEP][二課１G] ゲツジェネ')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1');
   
   return htmlOutput;

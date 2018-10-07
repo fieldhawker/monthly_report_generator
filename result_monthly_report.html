@@ -20,7 +20,11 @@
     <div class="msr_text_03">
       <h1 class="msr_h103">ゲツジェネ 1.0 Ver.KT </h1>
     </div>
+    <div class="msr_text_03">
+      <h4 class="msr_h403">> <a href="https://script.google.com/macros/s/AKfycbwI7Ye7jN-Fi82zHcXcLG80tDn7n8fcgcCWmiIRnlePe9PgN6Q1/exec">21ポータル</a></h4>
+    </div>
     
+    <form id="form1" name="form1" action="https://script.google.com/macros/s/AKfycbwMP__5vF-w0KVWrUfxpi6gwATkoVf1E99sBmR1IgzNr8REOck/exec" method="post">            
     <div class="msr_text_03">
     
       <table class="msr_table02">
@@ -32,13 +36,19 @@
             <td><p class="msr_btn05 btn" data-clipboard-target="#mail_title">
               <a>タイトルをコピー</a>
             </p></td>
-          </tr>
-          <tr>
             <td><p class="msr_btn05 btn" data-clipboard-target="#mail_text">
               <a>本文をコピー</a>
             </p></td>
+          </tr>
+          <tr>
             <td><p class="msr_btn05">
-              <a href=<?=mailto?>>メーラーを起動</a>
+              <a href=<?=mailto?>>メーラを起動</a>
+            </p></td>
+            <td><p class="msr_btn05">
+              <a href=<?=mailto2?>>メーラを起動(エンコ無)</a>
+            </p></td>
+            <td><p class="msr_btn05">            
+              <a id="send">メール送信</a>            
             </p></td>
           </tr>
         </tbody>
@@ -58,8 +68,10 @@
     
     <div class="msr_textarea_03">
       <h3 class="msr_h303">■本文</h3>
+      <input type="hidden" id="mail_text_hidden" name="mail_text_hidden" />            
       <textarea name="text" id="mail_text" class="mailtext"></textarea>
     </div>
+    </form>
     
     <div class="msr_textarea_03">
       <div class="frame frame-red">

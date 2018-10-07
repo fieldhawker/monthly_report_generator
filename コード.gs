@@ -22,7 +22,7 @@ function doPost(e){
   var staff_select = staffs[e.parameters.staff_select].name;
   var reader = staffs[e.parameters.staff_select].reader;
   var number = staffs[e.parameters.staff_select].number;
-  var group_address = staffs[e.parameters.staff_select].group_address;
+  var group_address = staffs[e.parameters.staff_select].group_address + ',' + staffs[e.parameters.staff_select].address;
   var affiliation = staffs[e.parameters.staff_select].affiliation;
   var start_date = e.parameters.start_date;
   var end_date = e.parameters.end_date;
@@ -72,6 +72,8 @@ function doPost(e){
     
   var array = ['mailto:', group_address, '?subject=', encodeURIComponent(mail_title), '&body=', encodeURIComponent(mail_text)];
   var mailto = array.join('');
+  var array = ['mailto:', group_address, '?subject=', mail_title, '&body=', mail_text];
+  var mailto2 = array.join('');
   
   Logger.log(mailto);
   
@@ -79,6 +81,7 @@ function doPost(e){
   html.mail_text = mail_text;
   html.mail_address = group_address;
   html.mailto = mailto;
+  html.mailto2 = mailto2;
   html.staff_select = staff_select;
   html.start_date = start_date;
   html.end_date = end_date;
@@ -114,7 +117,8 @@ function getStaffs() {
       "number": data[i][1], 
       "reader": data[i][2], 
       "group_address": data[i][3], 
-      "affiliation": data[i][4]
+      "affiliation": data[i][4],            
+      "address": data[i][5]
     });
   }
 //  Logger.log(json);

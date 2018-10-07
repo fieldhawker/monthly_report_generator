@@ -10,6 +10,17 @@
         firstDay: 1,
       });
       $( "#start_date, #end_date" ).datepicker('setDate', new Date());
-    
+      
+      $('#send').click(function(){            
+          if(window.confirm('送信してよろしいですか？')){ // 確認ダイアログを表示            
+              $('#mail_text_hidden').val($('#mail_text').val());            
+              javascript:form1.submit()            
+              return true; // 「OK」時は送信を実行            
+          }            
+          else{ // 「キャンセル」時の処理            
+              window.alert('キャンセルされました'); // 警告ダイアログを表示            
+              return false; // 送信を中止            
+          }            
+      });
     });
     </script>

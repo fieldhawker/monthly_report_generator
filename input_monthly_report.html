@@ -226,9 +226,20 @@
         <textarea id="q8" name="q8"></textarea>
     </div>
     
+    <div class="msr_pulldown_03">
+      <h3 class="msr_h303">■9. 現在の案件に満足していますか？</h3>
+      <select name="q9">
+        <option value="満足">満足</option>
+        <option value="やや満足">やや満足</option>
+        <option value="普通" selected>普通</option>
+        <option value="やや不満足">やや不満足</option>
+        <option value="不満足">不満足</option>
+      </select>
+    </div>
+    
     <div class="msr_textarea_03">
-      <h3 class="msr_h303">■9. 相談したいこと・困っていること<br />(自由記入)</h3>
-        <textarea id="q9" name="q9"></textarea>
+      <h3 class="msr_h303">■10. 相談したいこと・困っていること<br />(自由記入)</h3>
+        <textarea id="q10" name="q10"></textarea>
     </div>
     <p class="msr_sendbtn_03">
       <input type="submit" value="出力">
@@ -277,6 +288,7 @@
         if ($.cookie('q5')) q5 = $.cookie('q5');
         if ($.cookie('q6')) q6 = $.cookie('q6');
         if ($.cookie('q7')) q7 = $.cookie('q7');
+        if ($.cookie('q9')) q9 = $.cookie('q9');
         
         
         $('[name="q4"]').map(function(){
@@ -307,7 +319,14 @@
         $("#q2").val($.cookie('q2'));
         $("#q3").val($.cookie('q3'));
         $("#q8").text($.cookie('q8'));
-        $("#q9").text($.cookie('q9'));
+        
+        $('select[name="q9"] option').each(function() {
+          if (q9.indexOf( $(this).val() ) !== -1) {
+            $(this).attr('selected', 'selected');
+          }
+        });
+        
+        $("#q10").text($.cookie('q10'));
         //console.log(staffs.data[0].name);
       });
     </script>

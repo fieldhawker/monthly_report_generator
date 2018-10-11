@@ -35,6 +35,7 @@ function doPost(e){
   var q7 = e.parameters.q7;
   var q8 = e.parameters.q8;
   var q9 = e.parameters.q9;
+  var q10 = e.parameters.q10;
   
   if (typeof q4 === "undefined") {
     q4 = '';
@@ -64,7 +65,8 @@ function doPost(e){
     .replace(/__Q6__/,q6.toString().replace(/,/g,'\r\n'))
     .replace(/__Q7__/,q7.toString().replace(/,/g,'\r\n'))
     .replace(/__Q8__/,q8)
-    .replace(/__Q9__/,q9);
+    .replace(/__Q9__/,q9)
+    .replace(/__Q10__/,q10);
     
   var mail_title  = title
     .replace(/__AFFILIATION__/,affiliation)
@@ -94,6 +96,7 @@ function doPost(e){
   html.q7 = q7;
   html.q8 = q8;
   html.q9 = q9;
+  html.q10 = q10;
   
   var htmlOutput = html.evaluate();
   htmlOutput
